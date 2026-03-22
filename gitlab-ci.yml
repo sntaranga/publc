@@ -1,0 +1,10 @@
+stages:
+  - build:test
+ 
+create_test_network:
+  image: python:3.8
+  stage: build:test
+  script:
+    - pip install -r requirements.txt
+    - python test-network.py down
+    - python test-network.py up
