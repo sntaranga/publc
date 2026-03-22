@@ -1,7 +1,8 @@
 stages:
   - build:test
   - deploy:test
- 
+  - test:connectivity
+
 create_test_network:
   image: python:3.8
   stage: build:test
@@ -24,3 +25,10 @@ deploy_loopback_service:
     - CMD="devices device router2 ssh fetch-host-keys" make runcmdC
     - CMD="devices device router2 sync-from" make runcmdC
     - FILE=loopback-service-config.xml make loadconf
+
+test_configuration:
+  image: python:3.8
+  stage: test:connectivity
+  script:
+    - pip install pyats[full]==24.2
+    - python test.py
