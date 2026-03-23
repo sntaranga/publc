@@ -9,7 +9,7 @@ terraform {
 provider "iosxe" {
   username = "admin"
   password = "admin"
-  url  = "https://10.1.1.73" 
+  devices  = var.routers
 }
 
 resource "iosxe_interface_loopback" "management_loopback" {
